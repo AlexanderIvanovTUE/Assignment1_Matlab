@@ -129,6 +129,34 @@ classdef TestProcessData < matlab.unittest.TestCase
             testCase.verifyError(@() processData(testCase.TestCSVFile, testCase.OutputPlotFile), 'processData:unassignedOutputs');
         end
 
+        function testLinePlotConditionMet(testCase)
+            % Test when x is non-decreasing (conditionLinePlot == 1)
+            x = (1:10)'; % A non-decreasing sequence
+            y = rand(10, 1);
+            T = table(x, y, 'VariableNames', {'x', 'y'});
+            writetable(T, testCase.TestCSVFile);
+            
+            % Run processData and capture the return value
+            linePlotCreated = processData(testCase.TestCSVFile, testCase.OutputPlotFile);
+            
+            % Verify the line plot was created
+            testCase.verifyTrue(linePlotCreated);
+        end
+
+        function testLinePlotConditionNotMet(testCase)
+            % Test when x is not non-decreasing (conditionLinePlot == 0)
+            x = [1, 2, 3, 4, 5, 4, 7, 8, 9, 10]'; % A sequence with a decrease
+            y = rand(10, 1);
+            T = table(x, y, 'VariableNames', {'x', 'y'});
+            writetable(T, testCase.TestCSVFile);
+            
+            % Run processData and capture the return value
+            linePlotCreated = processData(testCase.TestCSVFile, testCase.OutputPlotFile);
+            
+            % Verify the line plot was not created
+            testCase.verifyFalse(linePlotCreated);
+        end
+
         
     end
 end
