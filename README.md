@@ -13,7 +13,7 @@ This project is a MATLAB application designed to process data from a CSV file, g
 No reliance on external libraries outside of MATLAB's standard functions and toolboxes.
 
 # Preconditions to using the application:
-1.The file to be used needs to be named inputData.csv
+1. The file to be used needs to be named inputData.csv .
 2. Columns need to be named x,y (lower case).
 3. The values in the cells need to be numerical.
 4. No missing values in the cells.
