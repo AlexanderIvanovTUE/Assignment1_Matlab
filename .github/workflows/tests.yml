@@ -19,6 +19,6 @@ jobs:
           release: latest
 
       - name: Run MATLAB tests
-        uses: matlab-actions/run-tests@v2
+        uses: matlab-actions/run-tests@v2    # Run the tests in the MATLAB file
         
 
