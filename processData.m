@@ -32,7 +32,8 @@ function linePlotCreated = processData(inputFile, outputPlotFile)
     linePlotCreated = false;
 
     % Check if x is non-decreasing
-    % If x is decreasing the line plot will look awful and there will
+    % If x is decreasing in some points 
+    % the line plot will look awful(lines will intersect) and there will
     % hardly be any purpose of it.
     conditionLinePlot = 1;
     for i = 2:length(x)
