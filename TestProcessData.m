@@ -46,7 +46,12 @@ classdef TestProcessData < matlab.unittest.TestCase
             writetable(T, testCase.TestCSVFile);
             
             testCase.verifyWarningFree(@() processData(testCase.TestCSVFile, testCase.OutputPlotFile));
+            % Verify the line plot image was created
             testCase.verifyTrue(isfile(testCase.OutputPlotFile));
+
+            % Verify the scatter plot image was created
+            scatterPlotFile = strrep(testCase.OutputPlotFile, '.png', '_scatter.png');
+            testCase.verifyTrue(isfile(scatterPlotFile));
         end
         
         function testMissingYColumn(testCase)
@@ -139,6 +144,9 @@ classdef TestProcessData < matlab.unittest.TestCase
             % Run processData and capture the return value
             linePlotCreated = processData(testCase.TestCSVFile, testCase.OutputPlotFile);
             
+            % Verify the condition was met
+            testCase.verifyTrue(linePlotCreated);
+
             % Verify the line plot was created
             testCase.verifyTrue(linePlotCreated);
         end
@@ -155,6 +163,9 @@ classdef TestProcessData < matlab.unittest.TestCase
             
             % Verify the line plot was not created
             testCase.verifyFalse(linePlotCreated);
+
+            % Verify the line plot image was not created
+            testCase.verifyFalse(isfile(testCase.OutputPlotFile));
         end
 
         
